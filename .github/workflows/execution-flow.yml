@@ -83,4 +83,4 @@ jobs:
       - name: Output info
         run: |
           echo "something broke geeza"
-          echo "${{ github }}"
+          echo "${{ toJson(github) }}"
