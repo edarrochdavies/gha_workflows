@@ -34,7 +34,7 @@ jobs:
         # if: steps.cache.outputs.cache-hit != 'true'
         run: npm install
       - name: Test code
-        continues-on-error: true
+        continue-on-error: true
         id: test-step
         run: npm run test
       - name: Upload test report
