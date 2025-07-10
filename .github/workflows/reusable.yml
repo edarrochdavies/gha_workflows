@@ -6,8 +6,19 @@ on:
         description: 'Name of the artifact to download'
         required: true
         type: string
+    outputs:
+      result:
+        description: 'The result of the deployment step'
+        value: ${{ jobs.deploy.outputs.outcome }}
+    # secrets:
+    #   some-secret:
+    #     description: 'A secret required for deployment'
+    #     required: false
+    #     type: string
 jobs:
   deploy:
+    outputs:
+      outcome: ${{ steps.set-result.outputs.step-result }}
     runs-on: ubuntu-latest
     steps:
       - name: Get code
@@ -18,3 +29,6 @@ jobs:
         run: ls -la
       - name: Output info
         run: echo "This is a reusable workflow for deployment"
+      - name: Set result output
+        id: set-result
+        run: echo "::set-output name=step-result::success"
