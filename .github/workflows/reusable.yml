@@ -1,8 +1,20 @@
 name: reusable-deploy
-on: workflow_call
+on: 
+  workflow_call:
+    inputs:
+      artifact-name:
+        description: 'Name of the artifact to download'
+        required: true
+        type: string
 jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
+      - name: Get code
+        uses: actions/download-artifact@v4
+        with: 
+          name: ${{ inputs.artifact-name }}
+      - name: List files
+        run: ls -la
       - name: Output info
         run: echo "This is a reusable workflow for deployment"
