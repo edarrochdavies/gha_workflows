@@ -67,7 +67,6 @@ jobs:
   deploy:
     needs: build
     uses: ./.github/workflows/reusable.yml
-        run: echo "Deploying..."
   report:
     needs: [lint, deploy]
     if: failure()
